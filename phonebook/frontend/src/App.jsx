@@ -82,22 +82,25 @@ const App = () => {
   }
 
   const handleRemove = (person) => {
-    personsService
-      .remove(person.id)
-      .then(_response => {
-        setPersons(persons.filter(p => p.id !== person.id))
-        setNotification(`Removed ${person.name}`)
-        setTimeout(() => {
-          setNotification(null)
-        }, 5000)
-      })
-      .catch(err => {
-        setPersons(persons.filter(p => p.id !== person.id))
-        setError(`Person ${person.name} was already removed from the server`)
-        setTimeout(() => {
-          setError(null)
-        }, 5000)
-      })
+    // eslint-disable-next-line no-restricted-globals
+    if(confirm(`Remove ${person.name} from phonebook?`)) {
+      personsService
+        .remove(person.id)
+        .then(_response => {
+          setPersons(persons.filter(p => p.id !== person.id))
+          setNotification(`Removed ${person.name}`)
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000)
+        })
+        .catch(err => {
+          setPersons(persons.filter(p => p.id !== person.id))
+          setError(`Person ${person.name} was already removed from the server`)
+          setTimeout(() => {
+            setError(null)
+          }, 5000)
+        }) 
+    }
   }
 
   const personsToShow = filter !== '' ? persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase())) : persons

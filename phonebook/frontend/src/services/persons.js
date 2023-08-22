@@ -1,8 +1,6 @@
 import axios from 'axios'
 
-import config from '../config'
-
-const baseUrl = config.BACKEND_URL
+const baseUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000/api/people'
 
 const getAll = () => {
   return axios.get(baseUrl)
