@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const baseUrl = process.env.API_BASE_URL || '/api/persons'
+import config from '../config'
+
+const baseUrl = config.BACKEND_URL
 
 const getAll = () => {
   return axios.get(baseUrl)
