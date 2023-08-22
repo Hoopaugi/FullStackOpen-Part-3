@@ -7,16 +7,17 @@ const Person = require('./models/person')
 
 const app = express()
 
+// eslint-disable-next-line no-unused-vars
 morgan.token('body', function(req, res) {
   const body = JSON.stringify(req.body)
 
   return body
-});
+})
 
 app.use(express.static('dist'))
 app.use(cors())
 app.use(express.json())
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 app.get('/info', (request, response) => {
   Person.find({}).then(people => {
@@ -53,8 +54,9 @@ app.post('/api/people', (request, response, next) => {
   }).catch(error => next(error))
 })
 
-app.delete('/api/people/:id', (request, response) => {
-  Person.findByIdAndRemove(request.params.id).then(result => {
+app.delete('/api/people/:id', (request, response, next) => {
+  // eslint-disable-next-line no-unused-vars
+  Person.findByIdAndRemove(request.params.id).then(_result => {
     response.status(204).end()
   }).catch(error => next(error))
 })

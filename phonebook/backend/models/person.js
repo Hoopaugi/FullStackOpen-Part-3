@@ -9,6 +9,7 @@ if (!url) {
 
 mongoose.set('strictQuery',false)
 
+// eslint-disable-next-line no-unused-vars
 mongoose.connect(url).then(result => {
   console.log('Connected to database')
 }).catch((error) => {
@@ -27,7 +28,7 @@ const personSchema = new mongoose.Schema({
     required: [true, 'phone number required'],
     validate: {
       validator: function(v) {
-        return /^\d{2,3}-\d*$/.test(v);
+        return /^\d{2,3}-\d*$/.test(v)
       },
       message: props => `${props.value} is not a valid phone number!`
     },
