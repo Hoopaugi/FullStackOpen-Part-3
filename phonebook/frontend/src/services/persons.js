@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:5000/api/persons'
+const baseUrl = process.env.API_BASE_URL || '/api/persons'
 
 const getAll = () => {
   return axios.get(baseUrl)
